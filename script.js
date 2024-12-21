@@ -1,63 +1,75 @@
-let currentQuestion = 0;
 const questions = [
-  { question: "Выбери котика:", correctAnswer: "cat", options: ["cat", "dog", "cow", "lion"] },
-  { question: "Выбери Менди:", correctAnswer: "mendi", options: ["mendi", "fighter1", "fighter2", "fighter3"] },
-  { question: "Выбери Майота:", correctAnswer: "mayot", options: ["mayot", "rapper1", "rapper2", "rapper3"] },
-  { question: "Выбери волейбол:", correctAnswer: "volleyball", options: ["volleyball", "basketball", "football", "tennis"] }
+  {
+    question: "Выбери котика",
+    options: ["cat.jpg", "dog.jpg", "cow.jpg", "lion.jpg"],
+    correct: "cat.jpg"
+  },
+  {
+    question: "Выбери Менди",
+    options: ["mendi.jpg", "fighter1.jpg", "fighter2.jpg", "fighter3.jpg"],
+    correct: "mendi.jpg"
+  },
+  {
+    question: "Выбери Майота",
+    options: ["mayot.jpg", "rapper1.jpg", "rapper2.jpg", "rapper3.jpg"],
+    correct: "mayot.jpg"
+  },
+  {
+    question: "Выбери волейбол",
+    options: ["volleyball.jpg", "basketball.jpg", "football.jpg", "tennis.jpg"],
+    correct: "volleyball.jpg"
+  }
 ];
-let correctAnswers = 0;
 
-function loadQuestion() {
-  const question = questions[currentQuestion];
-  document.getElementById('question-text').textContent = question.question;
-  
-  const optionsContainer = document.getElementById('options-container');
-  optionsContainer.innerHTML = ''; // очищаем контейнер перед загрузкой новых картинок
+let currentQuestionIndex = 0;
 
+function showQuestion(index) {
+  const question = questions[index];
+  document.getElementById("question-text").textContent = question.question;
+
+  const optionsContainer = document.getElementById("options-container");
+  optionsContainer.innerHTML = "";
   question.options.forEach(option => {
-    const img = document.createElement('img');
-    img.src = `${option}.jpg`;
+    const img = document.createElement("img");
+    img.src = option;
     img.alt = option;
-    img.onclick = () => checkAnswer(option);
+    img.onclick = () => checkAnswer(option, question.correct);
     optionsContainer.appendChild(img);
   });
 }
 
-function checkAnswer(selected) {
-  const correctAnswer = questions[currentQuestion].correctAnswer;
-  
-  if (selected === correctAnswer) {
-    correctAnswers++;
-    if (currentQuestion < questions.length - 1) {
-      currentQuestion++;
-      loadQuestion();
+function checkAnswer(selected, correct) {
+  const errorMessage = document.getElementById("error-message");
+
+  if (selected === correct) {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      showQuestion(currentQuestionIndex);
     } else {
       showFinalMessage();
     }
   } else {
-    showErrorMessage();
+    errorMessage.style.display = "block";
+    errorMessage.textContent = "Неправильный ответ! Попробуй еще раз.";
+    setTimeout(() => {
+      errorMessage.style.display = "none";
+    }, 2000);
   }
 }
 
-function showErrorMessage() {
-  const errorMessage = document.getElementById('error-message');
-  errorMessage.style.display = 'block';
-  setTimeout(() => {
-    errorMessage.style.display = 'none';
-  }, 2000);
-}
-
 function showFinalMessage() {
-  document.getElementById('final-message').style.display = 'block';
-  const finalImages = document.getElementById('final-images');
-  finalImages.innerHTML = ''; // очищаем предыдущие изображения
+  const finalMessage = document.getElementById("final-message");
+  const finalImages = document.getElementById("final-images");
+
+  finalMessage.style.display = "block";
 
   questions.forEach(question => {
-    const img = document.createElement('img');
-    img.src = `${question.correctAnswer}.jpg`;
-    img.alt = question.correctAnswer;
+    const img = document.createElement("img");
+    img.src = question.correct;
     finalImages.appendChild(img);
   });
 }
 
-loadQuestion();  // загружаем первый вопрос при старте
+document.addEventListener("DOMContentLoaded", () => {
+  showQuestion(currentQuestionIndex);
+});
