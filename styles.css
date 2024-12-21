@@ -1,3 +1,4 @@
+/* Основные стили */
 body {
   font-family: Arial, sans-serif;
   background-color: #2a2a2a;
@@ -36,6 +37,7 @@ body {
 .snowflakes span:nth-child(odd) { animation-duration: 6s; }
 .snowflakes span:nth-child(even) { animation-duration: 4s; animation-delay: 2s; }
 
+/* Приветственное сообщение */
 #greeting {
   padding: 30px;
   background-color: #ffeb3b;
@@ -49,6 +51,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* Контейнер для вопросов */
 #quiz-container {
   padding: 30px;
   background-color: #fff;
@@ -85,6 +88,7 @@ body {
   transform: scale(1.1);
 }
 
+/* Сообщение об ошибке */
 #error-message {
   text-align: center;
   background-color: #ff4c4c;
@@ -107,6 +111,7 @@ body {
   font-weight: bold;
 }
 
+/* Финальное сообщение */
 #final-message {
   background-color: #4CAF50;
   color: white;
@@ -144,6 +149,7 @@ body {
   max-width: 100%;
 }
 
+/* Мобильные стили */
 @media screen and (max-width: 768px) {
   #options-container {
     grid-template-columns: 1fr 1fr;
