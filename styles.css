@@ -42,11 +42,11 @@ body {
 }
 
 .snowflakes span:nth-child(odd) {
-  animation-duration: 7s;
+  animation-duration: 6s;
 }
 
 .snowflakes span:nth-child(even) {
-  animation-duration: 5s;
+  animation-duration: 4s;
   animation-delay: 2s;
 }
 
@@ -135,6 +135,7 @@ body {
   transform: translate(-50%, -50%);
   width: 80%;
   z-index: 100;
+  text-align: center;
 }
 
 #final-text {
@@ -157,13 +158,6 @@ body {
   max-width: 100%;
 }
 
-body {
-  background-image: url('https://i.pinimg.com/originals/9b/a2/cb/9ba2cb25347a16f74688accc92fa09d1.gif');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-
 /* Адаптивность */
 @media screen and (max-width: 768px) {
   #options-container {
@@ -173,4 +167,17 @@ body {
   #final-images {
     grid-template-columns: 1fr;
   }
+
+  #final-message {
+    position: relative;
+    top: 0;
+    transform: translate(0, 0);
+    margin-top: 30px;
+  }
+}
+
+/* Новый снегопад */
+.snowflakes span:nth-child(n) {
+  animation-duration: 6s;
+  animation-delay: 2s;
 }
