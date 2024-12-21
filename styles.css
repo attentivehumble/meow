@@ -65,6 +65,7 @@ body {
 #question-text {
   font-size: 22px;
   margin-bottom: 20px;
+  color: #333;
 }
 
 #options-container {
